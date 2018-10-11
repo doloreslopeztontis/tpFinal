@@ -1,0 +1,25 @@
+﻿
+@using tpFinal.Models
+@model Personaje
+
+@{ 
+    if((ViewBag.Mensaje != null) || (ViewBag.Mensaje != ""))
+    {
+        <h2> @ViewBag.Mensaje </h2>
+    }
+}
+
+<table border="0">
+    @{
+
+        foreach (Personaje P in ViewBag.Personajes)
+        {
+            <tr>
+                <td> @P.Nombre </td>
+                <td> @P.Categoria.Nombre </td>
+
+                <td> @Html.ActionLink("Eliminar", "EliminarPersonaje", "QEQ", new { Id = P.Id }, null) eliminar </td>
+            </tr>
+       }
+    }
+</table>
