@@ -16,32 +16,32 @@ namespace tpFinal.Controllers
             return View();
         }
 
-
-        public ActionResult ListaPersonajes(string categoria)
+        //ABML: Lopez Joffre
+        public ActionResult ListaPersonajes(string Categoria = "todos")
         {
-            ViewBag.Personajes = QEQ.ListarPersonajes(categoria);
+            ViewBag.Personajes = QEQ.ListarPersonajes(Categoria);
             return View();
         }
 
-        public ActionResult EliminarPersonaje (int Id)
-        {
-            QEQ.EliminarPersonaje(Id);
-            ViewBag.Mensaje = "eliminado exitosamente";
-            return View("ListaPersonajes", "QEQ");
-        }
-        public ActionResult home()
+        
+
+        //Inicio: Ramis
+        public ActionResult Home()
         {
             return View();
         }
-        public ActionResult about()
+
+        public ActionResult About()
         {
             return View();
         }
-        public ActionResult instructions()
+
+        public ActionResult Instrucciones()
         {
             return View();
         }
-        public ActionResult login()
+
+        public ActionResult Login()
         {
             return View();
         }

@@ -215,12 +215,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\who.sql" />
-    <Content Include="Content\about.css" />
+    <Content Include="Content\About.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\home.css" />
-    <Content Include="Content\instructions.css" />
-    <Content Include="Content\login.css" />
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\Instrucciones.css" />
+    <Content Include="Content\Login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -278,10 +278,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\QEQ\ListaPersonajes.cshtml" />
-    <Content Include="Views\QEQ\about.cshtml" />
-    <Content Include="Views\QEQ\home.cshtml" />
-    <Content Include="Views\QEQ\instructions.cshtml" />
-    <Content Include="Views\QEQ\login.cshtml" />
+    <Content Include="Views\QEQ\About.cshtml" />
+    <Content Include="Views\QEQ\Home.cshtml" />
+    <Content Include="Views\QEQ\Instrucciones.cshtml" />
+    <Content Include="Views\QEQ\Login.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -13,7 +13,7 @@ namespace tpFinal.Models
     public static class QEQ
     {
         //inicializacion
-        public static string connectionString = "Server=10.128.8.16;Database=QUIEN ES QUIEN;User Id=QEQC07;Password=QEQC07;";
+        public static string connectionString = "Server=10.128.8.16;Database=QEQC07;User Id=QEQC07;Password=QEQC07;";
 
 
         //metodos
@@ -96,7 +96,88 @@ namespace tpFinal.Models
             consulta.ExecuteNonQuery();
             desconectarBase(conexion);
         }
-        
+        public static void InsertarPersonaje(Personaje PERSONAJE)
+        {
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "InsertarPersonaje";
+            consulta.Parameters.AddWithValue("@nombre", PERSONAJE.Nombre);
+            consulta.Parameters.AddWithValue("@foto", PERSONAJE.Foto);
+            consulta.Parameters.AddWithValue("@categoria", PERSONAJE.Categoria);
+            consulta.ExecuteNonQuery();
+            desconectarBase(conexion);
+        }
+
+        /*
+        public static void InsertarTrabajador(Trabajador TRABAJADOR)
+        {
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "InsertarTrabajador";
+            consulta.Parameters.AddWithValue("@foto", TRABAJADOR.Foto);
+            consulta.Parameters.AddWithValue("@nombre", TRABAJADOR.Nombre);
+            consulta.Parameters.AddWithValue("@apellido", TRABAJADOR.Apellido);
+            consulta.Parameters.AddWithValue("@nacimiento", TRABAJADOR.Nacimiento);
+            consulta.Parameters.AddWithValue("@sueldo", TRABAJADOR.Sueldo);
+            consulta.Parameters.AddWithValue("@activo", TRABAJADOR.Activo);
+            consulta.ExecuteNonQuery();
+            desconectarBase(conexion);
+        }
+        public static Trabajador TraerTrabajador(int id)
+        {
+            Trabajador TRABAJADOR = new Trabajador();
+            TRABAJADOR.Codigo = id;
+
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "TraerTrabajador";
+            consulta.Parameters.AddWithValue("@cod", id);
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read() != false)
+            {
+                TRABAJADOR.Foto = (string)lector["Foto"];
+                TRABAJADOR.Nombre = (string)lector["Nombre"];
+                TRABAJADOR.Apellido = (string)lector["Apellido"];
+                TRABAJADOR.Nacimiento = (DateTime)lector["Nacimiento"];
+                TRABAJADOR.Sueldo = (float)lector["Sueldo"];
+                TRABAJADOR.Activo = (bool)lector["Activo"];
+            }
+            desconectarBase(conexion);
+            return TRABAJADOR;
+        }
+        public static void ModificarTrabajador(Trabajador TRABAJADOR)
+        {
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "ModificarTrabajador";
+            consulta.Parameters.AddWithValue("@cod", TRABAJADOR.Codigo);
+            consulta.Parameters.AddWithValue("@foto", TRABAJADOR.Foto);
+            consulta.Parameters.AddWithValue("@nombre", TRABAJADOR.Nombre);
+            consulta.Parameters.AddWithValue("@apellido", TRABAJADOR.Apellido);
+            consulta.Parameters.AddWithValue("@nacimiento", TRABAJADOR.Nacimiento);
+            consulta.Parameters.AddWithValue("@sueldo", TRABAJADOR.Sueldo);
+            consulta.Parameters.AddWithValue("@activo", TRABAJADOR.Activo);
+            consulta.ExecuteNonQuery();
+            desconectarBase(conexion);
+        }
+        public static void BorrarTrabajador(int id)
+        {
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "BorrarTrabajador";
+            consulta.Parameters.AddWithValue("@cod", id);
+            consulta.ExecuteNonQuery();
+            desconectarBase(conexion);
+        }
+
+        */
+
+
         //funciones
         private static SqlConnection conectarBase()
         {
