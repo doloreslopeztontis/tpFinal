@@ -27,5 +27,21 @@ namespace tpFinal.Controllers
             ViewBag.Mensaje = "eliminado exitosamente";
             return View("ListaPersonajes", "QEQ");
         }
+        public ActionResult home()
+        {
+            return View();
+        }
+        public ActionResult about()
+        {
+            return View();
+        }
+        public ActionResult instructions()
+        {
+            return View();
+        }
+        public ActionResult login()
+        {
+            return View();
+        }
     }
 }
