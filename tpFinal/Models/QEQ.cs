@@ -96,6 +96,7 @@ namespace tpFinal.Models
             consulta.ExecuteNonQuery();
             desconectarBase(conexion);
         }
+
         public static void InsertarPersonaje(Personaje PERSONAJE)
         {
             SqlConnection conexion = conectarBase();
@@ -178,6 +179,28 @@ namespace tpFinal.Models
         */
 
 
+
+        public static Usuario TraerUser(string Nombre, string Pass)
+        {
+            Usuario u = new Usuario();
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "LoginUsuario";
+            consulta.Parameters.AddWithValue("@usuario", Nombre);
+            consulta.Parameters.AddWithValue("@pass", Pass);
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read() != false)
+            {
+                u.NombreUsuario = (string)lector["Usuario"];
+                u.Contraseña = (string)lector["Contraseña"];
+                u.Perfil = (bool)lector["Perfil"];
+            }
+            desconectarBase(conexion);
+            return u;
+        }
+
+
         //funciones
         private static SqlConnection conectarBase()
         {
@@ -210,6 +233,7 @@ namespace tpFinal.Models
             desconectarBase(conexion);
             return lstCaracteristicas;
         }
+       
 
     }
 }
