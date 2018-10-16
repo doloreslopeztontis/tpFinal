@@ -13,7 +13,7 @@ namespace tpFinal.Models
     public static class QEQ
     {
         //inicializacion
-        public static string connectionString = "Server=./MSSQLSERVER;Database=QUIEN ES QUIEN;";
+        public static string connectionString = "Server=10.128.8.16;Database=QUIEN ES QUIEN;User Id=QEQC07;Password=QEQC07;";
 
 
         //metodos

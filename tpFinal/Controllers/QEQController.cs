@@ -16,16 +16,20 @@ namespace tpFinal.Controllers
             return View();
         }
 
+
         public ActionResult ListaPersonajes(string categoria)
         {
             ViewBag.Personajes = QEQ.ListarPersonajes(categoria);
             return View();
         }
+
         public ActionResult EliminarPersonaje (int Id)
         {
             QEQ.EliminarPersonaje(Id);
             ViewBag.Mensaje = "eliminado exitosamente";
             return View("ListaPersonajes", "QEQ");
         }
+
+
     }
 }
