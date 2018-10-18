@@ -10,14 +10,21 @@ namespace tpFinal.Controllers
 {
     public class QEQController : Controller
     {
-        Usuario u = new Usuario();
+
         // GET: QEQ
         public ActionResult Index()
         {
+            Usuario USER = new Usuario();
+            Session["Usuario"] = USER;
             return View();
         }
 
         //ABML: Lopez Joffre
+        public ActionResult PaginaPrincipalAdmin()
+        {
+            return View();
+        }
+
         public ActionResult ListaPersonajes(string Categoria = "todos")
         {
             ViewBag.Personajes = QEQ.ListarPersonajes(Categoria);
@@ -41,25 +48,47 @@ namespace tpFinal.Controllers
         {
             return View();
         }
-
-        // [HttpPost]
-        public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa .Fede..
+     
+        //Login: Haber
+        [HttpPost]
+        public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa. Fede.
         {
-            ViewBag.u = QEQ.TraerUser(Usuario, Contraseña);
-            if (u.Perfil == true) //true=admin
+            Session["USUARIO"] = QEQ.TraerUsuario(Usuario, Contraseña);
+            if (u.Perfil) //true = admin
+            return View();
+        }
+
+        public ActionResult login(string Usuario="", string Contraseña="")
+        {
+            if (Usuario == "" && Contraseña=="")
             {
-                return View("ListarPersonajes", "QEQ");
+                return View();
             }
             else
             {
-                return View();
+                bool Existe = ExisteUsuario(Usuario, Contraseña);
+              	Usuario USER = QEQ.TraerUsuario(Usuario, Contraseña);
+                Session["Usuario"] = Usuario USER;
+                if (Existe == false)
+                {
+                    return RedirectToAction("Registro", "QEQ");
+                }
+                else
+                {
+                    if (USER.Perfil == true) //true=admin
+                    {
+                        return RedirectToAction("PaginaPrincipalAdmin", "QEQ");
+                    }
+                    else
+                    {
+                        return RedirectToAction("comienzoJuego", "QEQ");
+                    }
+                }
             }
         }
-        public ActionResult login()
-        {
-                return View();
-        }
-        public ActionResult comienzoJuego()
+
+        //Juego
+	public ActionResult ComienzoJuego()
         {
             return View();
         }

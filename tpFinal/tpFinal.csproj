@@ -285,6 +285,11 @@
     <Content Include="Views\QEQ\Login.cshtml" />
     <Content Include="Views\QEQ\comienzoJuego.cshtml" />
     <Content Include="Views\QEQ\ActionLogin.cshtml" />
+<<<<<<< HEAD:tpFinal/tpFinal/tpFinal.csproj
+=======
+    <Content Include="Views\QEQ\PaginaPrincipalAdmin.cshtml" />
+    <Content Include="Views\QEQ\Registro.cshtml" />
+>>>>>>> 73622348a7de4a6ee6a10b1439b28f59a8efde4f:tpFinal/tpFinal.csproj
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
