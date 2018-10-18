@@ -6,6 +6,7 @@ using System.IO;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Web.Mvc;
 
 
 namespace tpFinal.Models
@@ -85,18 +86,6 @@ namespace tpFinal.Models
             return lstCaracteristicas;
         }
 
-
-        public static void EliminarPersonaje(int Id)
-        {
-            SqlConnection conexion = conectarBase();
-            SqlCommand consulta = conexion.CreateCommand();
-            consulta.CommandType = CommandType.StoredProcedure;
-            consulta.CommandText = "EliminarPersonaje";
-            consulta.Parameters.AddWithValue("@idpersonaje", Id);
-            consulta.ExecuteNonQuery();
-            desconectarBase(conexion);
-        }
-
         public static void InsertarPersonaje(Personaje PERSONAJE)
         {
             SqlConnection conexion = conectarBase();
@@ -109,6 +98,37 @@ namespace tpFinal.Models
             consulta.ExecuteNonQuery();
             desconectarBase(conexion);
         }
+        public static void EliminarPersonaje(int Id)
+        {
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "EliminarPersonaje";
+            consulta.Parameters.AddWithValue("@idpersonaje", Id);
+            consulta.ExecuteNonQuery();
+            desconectarBase(conexion);
+        }
+        public static Personaje TraerPersonaje(int Id)
+        {
+            Personaje personajeNow = new Personaje();
+            personajeNow.Id = Id;
+
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "TraerPersonaje";
+            consulta.Parameters.AddWithValue("@idpersonaje", Id);
+            SqlDataReader lector = consulta.ExecuteReader();
+            if (lector.Read() != false)
+            {
+                personajeNow.Nombre = (string)lector["Nombre"];
+                personajeNow.Foto= (string)lector["Foto"];
+                personajeNow.Categoria = (int)
+            }
+            desconectarBase(conexion);
+            return personajeNow;
+        }
+
 
         /*
         public static void InsertarTrabajador(Trabajador TRABAJADOR)
@@ -178,11 +198,21 @@ namespace tpFinal.Models
 
         */
 
-
-
-        public static Usuario TraerUser(string Nombre, string Pass)
+        public static bool ExisteUsuario(string user, string contra)
         {
-            Usuario u = new Usuario();
+            bool existe = false;
+            Usuario userNow = TraerUsuario(user, contra);
+            if(userNow != null)
+            {
+                existe = true;
+            }
+            return existe;
+        }
+
+        public static Usuario TraerUsuario(string Nombre, string Pass)
+        {
+            Usuario userNow = new Usuario();
+
             SqlConnection conexion = conectarBase();
             SqlCommand consulta = conexion.CreateCommand();
             consulta.CommandType = CommandType.StoredProcedure;
@@ -192,12 +222,12 @@ namespace tpFinal.Models
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read() != false)
             {
-                u.NombreUsuario = (string)lector["Usuario"];
-                u.Contraseña = (string)lector["Contraseña"];
-                u.Perfil = (bool)lector["Perfil"];
+                userNow.NombreUsuario = (string)lector["Usuario"];
+                userNow.Contraseña = (string)lector["Contraseña"];
+                userNow.Perfil = (bool)lector["Perfil"];
             }
             desconectarBase(conexion);
-            return u;
+            return userNow;
         }
 
 

@@ -10,10 +10,11 @@ namespace tpFinal.Controllers
 {
     public class QEQController : Controller
     {
-        Usuario u = new Usuario();
         // GET: QEQ
         public ActionResult Index()
         {
+            Usuario USUARIO = new Usuario();
+            Session["USUARIO"] = USUARIO;
             return View();
         }
 
@@ -42,14 +43,11 @@ namespace tpFinal.Controllers
             return View();
         }
 
-
-        public ActionResult Login()
-
         // [HttpPost]
-        public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa .Fede..
+        public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa. Fede.
         {
-            ViewBag.u = QEQ.TraerUser(Usuario, Contraseña);
-            if (u.Perfil == true) //true=admin
+            Session["USUARIO"] = QEQ.TraerUsuario(Usuario, Contraseña);
+            if (u.Perfil) //true = admin
             {
                 return View("ListarPersonajes", "QEQ");
             }
@@ -58,10 +56,12 @@ namespace tpFinal.Controllers
                 return View();
             }
         }
+
         public ActionResult login()
         {
                 return View();
         }
+
         public ActionResult comienzoJuego()
         {
             return View();
