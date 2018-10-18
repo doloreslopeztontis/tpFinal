@@ -16,7 +16,7 @@ namespace tpFinal.Controllers
         {
             Usuario USER = new Usuario();
             Session["Usuario"] = USER;
-            return View();
+		return View();            
         }
 
         //ABML: Lopez Joffre
@@ -31,7 +31,7 @@ namespace tpFinal.Controllers
             return View();
         }
 
-        
+   
 
         //Inicio: Ramis
         public ActionResult Home()
@@ -49,6 +49,7 @@ namespace tpFinal.Controllers
             return View();
         }
      
+
         //Login: Haber
         [HttpPost]
         public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa. Fede.
@@ -75,7 +76,7 @@ namespace tpFinal.Controllers
                 }
                 else
                 {
-                    if (USER.Perfil == true) //true=admin
+                    if (u.Perfil == true) //true=admin
                     {
                         return RedirectToAction("PaginaPrincipalAdmin", "QEQ");
                     }
@@ -87,8 +88,11 @@ namespace tpFinal.Controllers
             }
         }
 
+
         //Juego
 	public ActionResult ComienzoJuego()
+
+
         {
             return View();
         }
