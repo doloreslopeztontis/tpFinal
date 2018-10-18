@@ -285,6 +285,13 @@
     <Content Include="Views\QEQ\Login.cshtml" />
     <Content Include="Views\QEQ\comienzoJuego.cshtml" />
     <Content Include="Views\QEQ\ActionLogin.cshtml" />
+
+    <Content Include="Views\QEQ\PaginaPrincipalAdmin.cshtml" />
+    <Content Include="Views\QEQ\Registro.cshtml" />
+
+    <Content Include="Views\QEQ\PaginaPrincipalAdmin.cshtml" />
+    <Content Include="Views\QEQ\Registro.cshtml" />
+
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

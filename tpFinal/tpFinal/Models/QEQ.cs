@@ -209,21 +209,21 @@ namespace tpFinal.Models
             return existe;
         }
 
+
         public static Usuario TraerUsuario(string Nombre, string Pass)
         {
             Usuario userNow = new Usuario();
-
             SqlConnection conexion = conectarBase();
             SqlCommand consulta = conexion.CreateCommand();
             consulta.CommandType = CommandType.StoredProcedure;
-            consulta.CommandText = "LoginUsuario";
+            consulta.CommandText = "TraerUsuario";
             consulta.Parameters.AddWithValue("@usuario", Nombre);
-            consulta.Parameters.AddWithValue("@pass", Pass);
+            consulta.Parameters.AddWithValue("@contra", Pass);
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read() != false)
             {
-                userNow.NombreUsuario = (string)lector["Usuario"];
-                userNow.Contraseña = (string)lector["Contraseña"];
+                userNow.NombreUsuario = Nombre;
+                userNow.Contraseña = Pass;
                 userNow.Perfil = (bool)lector["Perfil"];
             }
             desconectarBase(conexion);
