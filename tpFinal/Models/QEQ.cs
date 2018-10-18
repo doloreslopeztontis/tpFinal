@@ -180,24 +180,24 @@ namespace tpFinal.Models
 
 
 
-        public static Usuario TraerUser(string Nombre, string Pass)
+        public static Usuario TraerUsuario(string Nombre, string Pass)
         {
-            Usuario u = new Usuario();
+            Usuario userNow = new Usuario();
             SqlConnection conexion = conectarBase();
             SqlCommand consulta = conexion.CreateCommand();
             consulta.CommandType = CommandType.StoredProcedure;
-            consulta.CommandText = "LoginUsuario";
+            consulta.CommandText = "TraerUsuario";
             consulta.Parameters.AddWithValue("@usuario", Nombre);
-            consulta.Parameters.AddWithValue("@pass", Pass);
+            consulta.Parameters.AddWithValue("@contra", Pass);
             SqlDataReader lector = consulta.ExecuteReader();
             if (lector.Read() != false)
             {
-                u.NombreUsuario = (string)lector["Usuario"];
-                u.Contraseña = (string)lector["Contraseña"];
-                u.Perfil = (bool)lector["Perfil"];
+                userNow.NombreUsuario = Nombre;
+                userNow.Contraseña = Pass;
+                userNow.Perfil = (bool)lector["Perfil"];
             }
             desconectarBase(conexion);
-            return u;
+            return userNow;
         }
 
 

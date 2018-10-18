@@ -10,14 +10,20 @@ namespace tpFinal.Controllers
 {
     public class QEQController : Controller
     {
-        Usuario u = new Usuario();
+        
         // GET: QEQ
         public ActionResult Index()
         {
+            Usuario u = new Usuario();
+            Session["Usuario"] = u;
             return View();
         }
 
         //ABML: Lopez Joffre
+        public ActionResult PaginaPrincipalAdmin()
+        {
+            return View();
+        }
         public ActionResult ListaPersonajes(string Categoria = "todos")
         {
             ViewBag.Personajes = QEQ.ListarPersonajes(Categoria);
@@ -41,24 +47,48 @@ namespace tpFinal.Controllers
         {
             return View();
         }
+     
 
+        //Login Haber
+        
+            
         // [HttpPost]
         public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa .Fede..
         {
-            ViewBag.u = QEQ.TraerUser(Usuario, Contraseña);
-            if (u.Perfil == true) //true=admin
+            return View();
+        }
+
+        public ActionResult login(string Usuario="", string Contraseña="")
+        {
+            if (Usuario == "" && Contraseña=="")
             {
-                return View("ListarPersonajes", "QEQ");
+                return View();
             }
             else
             {
-                return View();
+                bool Existe = ExisteUsuario(Usuario, Contraseña);
+                Session["Usuario"] = QEQ.TraerUsuario(Usuario, Contraseña);
+                Usuario u = (Usuario)Session["Usuario"];
+                if (Existe == false)
+                {
+                    return RedirectToAction("Registro", "QEQ");
+                }
+                else
+                {
+                    if (u.Perfil == true) //true=admin
+                    {
+                        return RedirectToAction("PaginaPrincipalAdmin", "QEQ");
+                    }
+                    else
+                    {
+                        return RedirectToAction("comienzoJuego", "QEQ");
+                    }
+                }
             }
         }
-        public ActionResult login()
-        {
-                return View();
-        }
+
+
+        //Juego
         public ActionResult comienzoJuego()
         {
             return View();
