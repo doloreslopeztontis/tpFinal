@@ -18,25 +18,6 @@ namespace tpFinal.Models
 
 
         //metodos
-        public static List<Categoria> ListarCategorias()
-        {
-            List<Categoria> lstCategorias = new List<Categoria>();
-
-            SqlConnection conexion = conectarBase();
-            SqlCommand consulta = conexion.CreateCommand();
-            consulta.CommandType = CommandType.StoredProcedure;
-            consulta.CommandText = "ListarCategorias";
-            SqlDataReader lector = consulta.ExecuteReader();
-            while (lector.Read() != false)
-            {
-                Categoria categoriaNow = new Categoria();
-                categoriaNow.Id = (int)lector["id"];
-                categoriaNow.Nombre = (string)lector["Categoria"];
-                lstCategorias.Add(categoriaNow);
-            }
-            desconectarBase(conexion);
-            return lstCategorias;
-        }
         public static List<Personaje> ListarPersonajes(string Categoria)
         {
             List<Personaje> lstPersonajes = new List<Personaje>();
@@ -108,27 +89,54 @@ namespace tpFinal.Models
             consulta.ExecuteNonQuery();
             desconectarBase(conexion);
         }
-        public static Personaje TraerPersonaje(int Id)
+
+        //ABML CATEGORIAS QUE PIDE EN EL SPRINT Y ES LO MAS ABURRIDO PERO BUENo
+        public static List<Categoria> ListarCategorias()
         {
-            Personaje personajeNow = new Personaje();
-            personajeNow.Id = Id;
+            List<Categoria> lstCategorias = new List<Categoria>();
 
             SqlConnection conexion = conectarBase();
             SqlCommand consulta = conexion.CreateCommand();
             consulta.CommandType = CommandType.StoredProcedure;
-            consulta.CommandText = "TraerPersonaje";
-            consulta.Parameters.AddWithValue("@idpersonaje", Id);
+            consulta.CommandText = "ListarCategorias";
             SqlDataReader lector = consulta.ExecuteReader();
-            if (lector.Read() != false)
+            while (lector.Read() != false)
             {
-                personajeNow.Nombre = (string)lector["Nombre"];
-                personajeNow.Foto= (string)lector["Foto"];
-                personajeNow.Categoria = (int)
+                Categoria categoriaNow = new Categoria();
+                categoriaNow.Id = (int)lector["id"];
+                categoriaNow.Nombre = (string)lector["Categoria"];
+                lstCategorias.Add(categoriaNow);
             }
             desconectarBase(conexion);
-            return personajeNow;
+            return lstCategorias;
         }
-
+        public static void InsertarCategoria(string Categoria)
+        {
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "InsertarCategoria";
+            consulta.Parameters.AddWithValue("@categoria", Categoria);
+            consulta.ExecuteNonQuery();
+            desconectarBase(conexion);
+        }
+        public static string EliminarCategoria(int Id)
+        {
+            string Mensaje = "";
+            SqlConnection conexion = conectarBase();
+            SqlCommand consulta = conexion.CreateCommand();
+            consulta.CommandType = CommandType.StoredProcedure;
+            consulta.CommandText = "EliminarCategoria";
+            consulta.Parameters.AddWithValue("@idcategoria", Id);
+            int affected = consulta.ExecuteNonQuery();
+            if (affected == 0)
+            {
+                Categoria categoriaNow = TraerCategoria();
+                Mensaje = "existen personajes bajo esa categoria. si deseas eliminar " + categoriaNow.Nombre + "borralos primero.";
+            }
+            desconectarBase(conexion);
+            return Mensaje;
+        }
 
         /*
         public static void InsertarTrabajador(Trabajador TRABAJADOR)
@@ -208,7 +216,6 @@ namespace tpFinal.Models
             }
             return existe;
         }
-
 
         public static Usuario TraerUsuario(string Nombre, string Pass)
         {

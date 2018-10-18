@@ -289,9 +289,6 @@
     <Content Include="Views\QEQ\PaginaPrincipalAdmin.cshtml" />
     <Content Include="Views\QEQ\Registro.cshtml" />
 
-    <Content Include="Views\QEQ\PaginaPrincipalAdmin.cshtml" />
-    <Content Include="Views\QEQ\Registro.cshtml" />
-
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
