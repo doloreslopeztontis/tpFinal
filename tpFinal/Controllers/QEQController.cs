@@ -52,14 +52,12 @@ namespace tpFinal.Controllers
 
         //Login: Haber
         [HttpPost]
-        public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa. Fede.
+        public ActionResult ActionLogin()
         {
-            Session["USUARIO"] = QEQ.TraerUsuario(Usuario, Contraseña);
-            if (u.Perfil) //true = admin
             return View();
         }
 
-        public ActionResult login(string Usuario="", string Contraseña="")
+        public ActionResult Login(string Usuario="", string Contraseña="")
         {
             if (Usuario == "" && Contraseña=="")
             {
@@ -67,16 +65,16 @@ namespace tpFinal.Controllers
             }
             else
             {
-                bool Existe = ExisteUsuario(Usuario, Contraseña);
-              	Usuario USER = QEQ.TraerUsuario(Usuario, Contraseña);
-                Session["Usuario"] = Usuario USER;
+                bool Existe = QEQ.ExisteUsuario(Usuario, Contraseña);
+                Usuario USER = QEQ.TraerUsuario(Usuario, Contraseña);
+                Session["Usuario"] = USER;
                 if (Existe == false)
                 {
                     return RedirectToAction("Registro", "QEQ");
                 }
                 else
                 {
-                    if (u.Perfil == true) //true=admin
+                    if (USER.Perfil == true) //true=admin
                     {
                         return RedirectToAction("PaginaPrincipalAdmin", "QEQ");
                     }
