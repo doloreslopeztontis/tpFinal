@@ -42,9 +42,6 @@ namespace tpFinal.Controllers
             return View();
         }
 
-
-        public ActionResult Login()
-
         // [HttpPost]
         public ActionResult ActionLogin(string Usuario, string Contraseña) //cambiar, todavia no anda. no se que pasa .Fede..
         {

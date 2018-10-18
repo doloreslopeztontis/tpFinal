@@ -279,18 +279,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\QEQ\ListaPersonajes.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\QEQ\About.cshtml" />
     <Content Include="Views\QEQ\Home.cshtml" />
     <Content Include="Views\QEQ\Instrucciones.cshtml" />
     <Content Include="Views\QEQ\Login.cshtml" />
-=======
-    <Content Include="Views\QEQ\about.cshtml" />
-    <Content Include="Views\QEQ\home.cshtml" />
-    <Content Include="Views\QEQ\instructions.cshtml" />
-    <Content Include="Views\QEQ\login.cshtml" />
     <Content Include="Views\QEQ\comienzoJuego.cshtml" />
->>>>>>> a01c594f7e92b1c7e2df492055bb5e834451d7e7
+    <Content Include="Views\QEQ\ActionLogin.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
